@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--
+    This section defines project-level properties.
+
+    AssemblyName
+      Name of the output assembly.
+    Configuration
+      Specifies a default value for debug.
+    OutputType
+      Must be "Library" for VSTO.
+    Platform
+      Specifies what CPU the output of this project can run on.
+    NoStandardLibraries
+      Set to "false" for VSTO.
+    RootNamespace
+      In C#, this specifies the namespace given to new files. In VB, all objects are
+      wrapped in this namespace at runtime.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{BAA0C2D2-18E2-41B9-852F-F413020CAA33};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7DDACDA7-BDD7-489E-9AE4-FDB8016CB732}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <RootNamespace>CrunchBaseXLS</RootNamespace>
+    <AssemblyName>CrunchBaseXLS</AssemblyName>
+    <LoadBehavior>3</LoadBehavior>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <DefineConstants>VSTO40</DefineConstants>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>HomeSite</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <PropertyGroup>
+    <!--
+      OfficeApplication
+        Add-in host application
+    -->
+    <OfficeApplication>Excel</OfficeApplication>
+  </PropertyGroup>
+  <!--
+    This section defines properties that are set when the "Debug" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!--
+    This section defines properties that are set when the "Release" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!--
+    This section specifies references for the project.
+  -->
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Tools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Tools.Excel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <Private>False</Private>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <Private>False</Private>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <!--
+    This section defines the user source files that are part of the project.
+     
+    A "Compile" element specifies a source file to compile.
+    An "EmbeddedResource" element specifies an .resx file for embedded resources.
+    A "None" element specifies a file that is not to be passed to the compiler (for instance, 
+    a text file or XML file).
+    The "AppDesigner" element specifies the directory where the application properties files
+    can be found.
+  -->
+  <ItemGroup>
+    <Compile Include="CrunchProduct.cs" />
+    <Compile Include="DiagnosticTimer.cs" />
+    <Compile Include="CrunchSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrunchSearchForm.Designer.cs">
+      <DependentUpon>CrunchSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceSerializers.cs" />
+    <Compile Include="CrunchBaseConnect.cs" />
+    <Compile Include="DetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailsForm.Designer.cs">
+      <DependentUpon>DetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCrunchProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowCrunchProgress.Designer.cs">
+      <DependentUpon>ShowCrunchProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="CrunchSearchForm.resx">
+      <DependentUpon>CrunchSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailsForm.resx">
+      <DependentUpon>DetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowCrunchProgress.resx">
+      <DependentUpon>ShowCrunchProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CrunchRibbon.resx">
+      <DependentUpon>CrunchRibbon.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="CrunchBaseXLS_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\cbSearchResults.datasource" />
+    <None Include="Properties\DataSources\CrunchBaseXLS.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\CrunchBaseXLS.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Adjustments.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.AnswerWizard.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.AnswerWizardFiles.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Assistant.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Axes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Balloon.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.BalloonCheckbox.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.BalloonCheckboxes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.BalloonLabel.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.BalloonLabels.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.BulletFormat2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CalloutFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CanvasShapes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ChartColorFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ChartFillFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ChartFont.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ChartGroups.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ChartPoint.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ColorFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.COMAddIn.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.COMAddIns.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBar.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarButton.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarButtonClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarComboBox.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarComboBoxClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarControl.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarControls.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarPopup.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBars.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CommandBarsClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ConnectorFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ContactCard.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Crop.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomTaskPane.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomTaskPaneClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomTaskPaneEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLNode.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLNodes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLPart.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLPartClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLParts.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLPartsClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLPrefixMapping.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLPrefixMappings.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLSchema.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLSchemaCollection.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLSchemaCollectionClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLValidationError.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.CustomXMLValidationErrors.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DiagramNode.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DiagramNodeChildren.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DiagramNodes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DocumentInspector.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DocumentInspectors.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DocumentLibraryVersion.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DocumentLibraryVersions.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DocumentProperties.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.DocumentProperty.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.EffectParameter.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.EffectParameters.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.EncryptionProvider.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FileDialog.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FileDialogFilter.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FileDialogFilters.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FileDialogSelectedItems.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FileSearch.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FileTypes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FillFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Font2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FoundFiles.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.FreeformBuilder.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.GlowFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.GradientStop.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.GradientStops.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.GridLines.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.GroupShapes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.HTMLProject.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.HTMLProjectItem.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.HTMLProjectItems.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IAccessible.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IAssistance.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IBlogExtensibility.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IBlogPictureExtensibility.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICommandBarButtonEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICommandBarComboBoxEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICommandBarsEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IConverter.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IConverterApplicationPreferences.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IConverterPreferences.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IConverterUICallback.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICTPFactory.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICustomTaskPaneConsumer.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICustomXMLPartEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ICustomXMLPartsEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IDocumentInspector.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IFind.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IFoundFiles.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ILicAgent.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ILicValidator.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ILicWizExternal.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoAxis.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoAxisTitle.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoBorder.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoCharacters.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoChart.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoChartArea.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoChartData.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoChartFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoChartGroup.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoChartTitle.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoContactCard.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoCorners.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDataLabel.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDataLabels.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDataTable.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDiagram.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDispCagNotifySink.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDisplayUnitLabel.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDownBars.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoDropLines.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEnvelopeVB.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEnvelopeVBEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEnvelopeVBEvents_EnvelopeHideEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEnvelopeVBEvents_EnvelopeShowEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEnvelopeVBEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEnvelopeVBEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoErrorBars.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoEServicesDialog.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoFloor.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoHiLoLines.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoHyperlinks.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoInterior.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoLeaderLines.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoLegend.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoLegendKey.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoPlotArea.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoSeries.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoSeriesLines.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoTickLabels.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoTrendline.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoUpBars.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IMsoWalls.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IRibbonControl.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IRibbonExtensibility.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.IRibbonUI.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.LanguageSettings.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.LegendEntries.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.LegendEntry.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.LineFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MetaProperties.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MetaProperty.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoDebugOptions.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoDebugOptions_UT.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoDebugOptions_UTManager.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoDebugOptions_UTRunResult.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoDebugOptions_UTs.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoEnvelope.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.MsoEnvelopeClass.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.NewFile.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ODSOColumn.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ODSOColumns.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ODSOFilter.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ODSOFilters.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.OfficeDataSourceObject.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.OfficeTheme.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ParagraphFormat2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Permission.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerDialog.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerField.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerFields.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerProperties.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerProperty.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerResult.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PickerResults.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PictureEffect.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PictureEffects.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PictureFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Points.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PolicyItem.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PropertyTest.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.PropertyTests.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ReflectionFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Ruler2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.RulerLevel2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.RulerLevels2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ScopeFolder.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ScopeFolders.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Script.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Scripts.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SearchFolders.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SearchScope.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SearchScopes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SeriesCollection.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ServerPolicy.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ShadowFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Shape.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ShapeNode.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ShapeNodes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ShapeRange.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Shapes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspace.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceFile.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceFiles.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceFolder.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceFolders.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceLink.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceLinks.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceMember.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceMembers.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceTask.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SharedWorkspaceTasks.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Signature.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SignatureInfo.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SignatureProvider.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SignatureSet.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SignatureSetup.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArt.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtColor.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtColors.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtLayout.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtLayouts.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtNode.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtNodes.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtQuickStyle.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartArtQuickStyles.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SmartDocument.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.SoftEdgeFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Sync.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TabStop2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TabStops2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TextColumn2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TextEffectFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TextFrame.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TextFrame2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.TextRange2.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThemeColor.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThemeColorScheme.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThemeEffectScheme.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThemeFont.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThemeFonts.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThemeFontScheme.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.ThreeDFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.Trendlines.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.UserPermission.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WebComponent.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WebComponentFormat.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WebComponentProperties.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WebComponentWindowExternal.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WebPageFont.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WebPageFonts.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WorkflowTask.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WorkflowTasks.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WorkflowTemplate.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core.WorkflowTemplates.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarActiveX.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarButton.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarButtonEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarButtonEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarButtonEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarComboBox.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarComboBoxEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarComboBoxEvents_ChangeEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarComboBoxEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarComboBoxEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBars.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarsEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarsEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarsEvents_OnUpdateEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CommandBarsEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomTaskPane.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomTaskPaneEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomTaskPaneEvents_DockPositionStateChangeEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomTaskPaneEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomTaskPaneEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomTaskPaneEvents_VisibleStateChangeEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPart.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartEvents_NodeAfterDeleteEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartEvents_NodeAfterInsertEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartEvents_NodeAfterReplaceEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLParts.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartsEvents.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartsEvents_Event.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartsEvents_PartAfterAddEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartsEvents_PartAfterLoadEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartsEvents_PartBeforeDeleteEventHandler.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLPartsEvents_SinkHelper.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._CustomXMLSchemaCollection.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._IMsoDispObj.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Office.Core._IMsoOleAccDispObj.datasource" />
+    <None Include="Properties\DataSources\SearchResultsList.datasource" />
+    <None Include="Properties\DataSources\System.Web.Script.Serialization.CS.FundingRoundsConverter.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="CrunchRibbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrunchRibbon.Designer.cs">
+      <DependentUpon>CrunchRibbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThisAddIn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="ThisAddIn.Designer.xml">
+      <DependentUpon>ThisAddIn.cs</DependentUpon>
+    </None>
+    <Compile Include="ThisAddIn.Designer.cs">
+      <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CrunchBaseXLS_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>417B3566E1FFF63E8B469AA6CFA51AD965F80F67</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <!-- Include the build rules for a C# project. -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Include additional build rules for an Office application add-in. -->
+  <Import Project="$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" Condition="'$(VSToolsPath)' != ''" />
+  <!-- This section defines VSTO properties that describe the host-changeable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
+        <ProjectProperties HostName="Excel" HostPackage="{20A848B8-E01F-4801-962E-25DB0FF57389}" OfficeVersion="14.0" VstxVersion="4.0" ApplicationType="Excel" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\14.0\Excel\InstallRoot\Path#excel.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
+        <Host Name="Excel" GeneratedCodeNamespace="CrunchBaseXLS" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+        </Host>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

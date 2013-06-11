@@ -31,14 +31,17 @@ namespace CrunchBaseXLS
         {
             int countcompany = cbcompanylist.Count + 1;
             string[,] companies = new string[countcompany, 1];
-            string[,] permalink = new string[countcompany, 1];
+            string[,] permalink = new string[countcompany, 1];  // actual hyperlink to crunchbase entry
+            string[,] shortperma = new string[countcompany,1]; // just short part of permalink
             // put headers in the 0 row
             companies[0, 0] = "Company Name";
+            shortperma[0, 0] = "Short Permalink"
             permalink[0, 0] = "Company Permalink";
             int row = 1;
             foreach (cbCompanyObject c in cbcompanylist)
             {
                 companies[row, 0] = c.name;
+                shortperma[row,0]=c.permalink;
                 if (c.permalink.Length < 200)
                 {
                     permalink[row++, 0] = "=HYPERLINK(\"" + "http://www.crunchbase.com/"+space+"/" + c.permalink + "\")";
@@ -47,6 +50,7 @@ namespace CrunchBaseXLS
                 {
                     permalink[row++, 0] = "ERROR: TOO LONG FOR EXCEL";
                 }
+                
             }
             var curr = activecell.Worksheet;
             var startCell = activecell;
@@ -73,7 +77,11 @@ namespace CrunchBaseXLS
                 hyperlinkcol.Item(i).Formula = permalink[i, 0];
             }
             Console.Error.WriteLine("time to format hyperlinks the slow way {0}", System.DateTime.Now - slowstart);
-
+            //hack hack add the shortperma column
+            
+            startCell=curr.Cells[activecell.Row,activecell.Column+2];  //2 over
+            ThisAddIn.OutputArrayToExcel(startCell,shortperma);
+            // add stuff here-->endCell=curr.
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e)

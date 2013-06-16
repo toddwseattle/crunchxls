@@ -35,7 +35,7 @@ namespace CrunchBaseXLS
             string[,] shortperma = new string[countcompany,1]; // just short part of permalink
             // put headers in the 0 row
             companies[0, 0] = "Company Name";
-            shortperma[0, 0] = "Short Permalink"
+            shortperma[0, 0] = "Short Permalink";
             permalink[0, 0] = "Company Permalink";
             int row = 1;
             foreach (cbCompanyObject c in cbcompanylist)
